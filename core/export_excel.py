@@ -30,12 +30,9 @@ for index, line in enumerate(f.readlines()):
                 'right_option': ";\n".join([row['option'][r] for r in rights])
             })
 
-# 排序
-lis = sorted(all_q, key=lambda i: (i['name']))
-lis.reverse()
-
-# 去重
-lis = [dict(t) for t in set([tuple(d.items()) for d in lis])]
+# 去重 & 排序
+lis = [dict(t) for t in set([tuple(d.items()) for d in all_q])]
+lis = sorted(lis, key=lambda i: (i['name']))
 
 # 写入文件
 pf = pd.DataFrame(list(lis))
