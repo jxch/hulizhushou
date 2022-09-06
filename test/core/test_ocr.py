@@ -8,3 +8,9 @@ with open(img_url, 'rb') as f:
     a = f.read()
 
 res = ocr.get_text(a)
+
+stem = ocr.get_stem(res)
+print(stem)
+
+options = ocr.get_options(res)
+print(options)

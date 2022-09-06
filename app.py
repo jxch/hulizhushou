@@ -21,5 +21,17 @@ def search_text():
     return render_template('index.html', res=df)
 
 
+@app.route('/search_option_by_img_base64', methods=["GET"])
+def search_option_by_img_base64():
+    img_base64 = request.args['img_base64']
+    return search_service.search_option_by_img_base64(img_base64)
+
+
+@app.route('hidden_search_option_by_img_base64', methods=["GET"])
+def hidden_search_option_by_img_base64():
+    img_base64 = request.args['img_base64']
+    return search_service.hidden_search_option_by_img_base64(img_base64)
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, threaded=True)

@@ -1,5 +1,6 @@
 FROM python
 
+RUN mkdir -p /code
 ADD . /code
 WORKDIR /code
 ENV FLASK_APP=app.py
