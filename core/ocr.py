@@ -1,11 +1,19 @@
 import easyocr
 import logging
+from functools import lru_cache
 
-reader = easyocr.Reader(['en', 'ch_sim'])
+
+@lru_cache(maxsize=1)
+def get_reader():
+    return easyocr.Reader(['en', 'ch_sim'])
+
+
+def init_ocr():
+    get_reader()
 
 
 def get_text(img_bytes):
-    result = reader.readtext(img_bytes)
+    result = get_reader().readtext(img_bytes)
     logging.info(f"read result: {result}")
 
     text_list = []
@@ -44,5 +52,3 @@ def get_options(text_list):
             options['E'] = text_list[index + 1]
 
     return options
-
-
