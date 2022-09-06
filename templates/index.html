@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>护理助手题库</title>
+    <style>
+        .qgg-table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #c6c6c6 !important;
+            margin-bottom: 20px;
+        }
+
+        .qgg-table th {
+            border-collapse: collapse;
+            border-right: 1px solid #c6c6c6 !important;
+            border-bottom: 1px solid #c6c6c6 !important;
+            background-color: #ddeeff !important;
+            padding: 5px 9px;
+            font-size: 14px;
+            font-weight: normal;
+            text-align: center;
+        }
+
+        .qgg-table td {
+            border-collapse: collapse;
+            border-right: 1px solid #c6c6c6 !important;
+            border-bottom: 1px solid #c6c6c6 !important;
+            padding: 5px 9px;
+            font-size: 12px;
+            font-weight: normal;
+            text-align: center;
+            word-break: break-all;
+        }
+
+        .qgg-table tr:nth-child(odd) {
+            background-color: #fff !important;
+        }
+
+        .qgg-table tr:nth-child(even) {
+            background-color: #f8f8f8 !important;
+        }
+    </style>
+</head>
+<body>
+
+<form action="{{ request.url }}search_text" method="GET">
+    <label>题干</label>
+    <label>
+        <input type="text" name="text" placeholder="输入题干 点击查询"/>
+    </label>
+    <p><input type="submit" value="查询"/></p>
+</form>
+
+{% if res.empty %}
+    <p>查无此题</p>
+{% else %}
+    <table class="qgg-table">
+        <tr>
+            <th>题干</th>
+            <th>正确选项</th>
+            <th>所有选项</th>
+        </tr>
+        {% for index, row in res.iterrows() %}
+            <tr>
+                <td> {{ row[0] }} </td>
+                <td> {{ row.right_option }} </td>
+                <td> {{ row.all_option }} </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+</body>
+</html>
