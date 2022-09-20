@@ -5,7 +5,7 @@ from functools import lru_cache
 
 @lru_cache(maxsize=1)
 def get_reader():
-    return easyocr.Reader(['en', 'ch_sim'])
+    return easyocr.Reader(['en', 'ch_sim'], gpu=True)
 
 
 def init_ocr():
@@ -13,22 +13,22 @@ def init_ocr():
 
 
 def get_text(img_bytes):
-    result = get_reader().readtext(img_bytes)
+    reader = get_reader()
+    result = reader.readtext(img_bytes)
     logging.info(f"read result: {result}")
 
     text_list = []
     for t in result:
         text_list.append(t[-2])
 
-    logging.info(f"text list: {text_list}")
     return text_list
 
 
 def get_stem(text_list):
     stem_index = None
     for index, text in enumerate(text_list):
-        if text == '单选题' or text == '多选题':
-            stem_index = index + 1
+        if text == '考生:马文静 (日间)' or text == '考生:马文静(日间)':
+            stem_index = index + 2
             break
 
     if stem_index is not None:
@@ -42,13 +42,16 @@ def get_options(text_list):
     for index, text in enumerate(text_list):
         if text == 'A':
             options['A'] = text_list[index + 1]
-        if text == 'B':
+        if text == 'B' or text == '8' or text == 8:
             options['B'] = text_list[index + 1]
-        if text == 'C':
+            if '错误' == options['B']:
+                break
+        if text == 'C' or text == '6' or text == 6:
             options['C'] = text_list[index + 1]
         if text == 'D' or text == '0' or text == 0:
             options['D'] = text_list[index + 1]
-        if text == 'E':
+        if text == 'E' or text == '巳':
             options['E'] = text_list[index + 1]
+            break
 
     return options
