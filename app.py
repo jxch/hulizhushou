@@ -3,7 +3,6 @@ import logging
 import service.search_service as search_service
 from flask import request
 import pandas as pd
-import core.ocr as ocr
 from util.json_util import return_json
 
 app = Flask(__name__)
@@ -21,6 +20,7 @@ def search_text():
     text = request.args['text']
     df = search_service.search_text(text)
     return render_template('index.html', res=df)
+
 
 @app.route('/right_options', methods=["POST"])
 @return_json
@@ -45,12 +45,6 @@ def hidden_search_option_by_img_base64():
 def hidden_search_all_by_img_base64():
     img = request.json.get('img_base64')
     return search_service.hidden_search_all_by_img_base64(img)
-
-
-@app.route('/init', methods=["GET"])
-def init():
-    ocr.init_ocr()
-    return 'SUCCESS'
 
 
 if __name__ == '__main__':
