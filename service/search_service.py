@@ -10,10 +10,13 @@ df = pd.read_excel(excel_path, sheet_name='题库')
 
 
 def search_text(text):
-    text = text.replace("0)", "")
-    text = text.replace(")", "\)")
-    text = text.replace("(", "\(")
-    return df.query(f'name.str.contains("{text}")')
+    if text:
+        text = text.replace("0)", "")
+        text = text.replace(")", "\)")
+        text = text.replace("(", "\(")
+        return df.query(f'name.str.contains("{text}")')
+    else:
+        return pd.DataFrame([])
 
 
 def get_right_text_list(stem):
