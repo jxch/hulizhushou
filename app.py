@@ -29,23 +29,5 @@ def right_options():
     return search_service.get_right_options_by_question(question)
 
 
-@app.route('/search_option_by_img_base64', methods=["GET"])
-def search_option_by_img_base64():
-    img_base64 = request.args['img_base64']
-    return search_service.search_option_by_img_base64(img_base64)
-
-
-@app.route('/hidden_search_option_by_img_base64', methods=["POST"])
-def hidden_search_option_by_img_base64():
-    img = request.json.get('img_base64')
-    return search_service.hidden_search_option_by_img_base64(img)
-
-
-@app.route('/hidden_search_all_by_img_base64', methods=["POST"])
-def hidden_search_all_by_img_base64():
-    img = request.json.get('img_base64')
-    return search_service.hidden_search_all_by_img_base64(img)
-
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, threaded=True)

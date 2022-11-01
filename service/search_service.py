@@ -1,7 +1,5 @@
-import logging
 from os.path import dirname, abspath
 import pandas as pd
-import base64
 
 base_dir = dirname(dirname(abspath(__file__)))
 excel_path = base_dir + "/res/题库.xlsx"
