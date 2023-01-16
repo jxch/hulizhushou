@@ -18,7 +18,8 @@ def hello_world():
 @app.route('/search_text', methods=["GET"])
 def search_text():
     text = request.args['text']
-    df = search_service.search_text(text)
+    tiku_code = request.args['tiku']
+    df = search_service.search_text(text, search_service.tiku_factory(tiku_code))
     return render_template('index.html', res=df)
 
 
@@ -26,7 +27,8 @@ def search_text():
 @return_json
 def right_options():
     question = request.json.get('question')
-    return search_service.get_right_options_by_question(question)
+    tiku_code = request.json.get('tiku')
+    return search_service.get_right_options_by_question(question, search_service.tiku_factory(tiku_code))
 
 
 if __name__ == '__main__':

@@ -1,23 +1,31 @@
 from os.path import dirname, abspath
 import pandas as pd
 
-base_dir = dirname(dirname(abspath(__file__)))
-excel_path = base_dir + "/res/题库.xlsx"
-df = pd.read_excel(excel_path, sheet_name='题库')
+
+def tiku_factory(code=None):
+    if code == "18":
+        return "题库-18.xlsx"
+    return "题库.xlsx"
 
 
-def search_text(text):
+def df_factory(tiku):
+    base_dir = dirname(dirname(abspath(__file__)))
+    excel_path = base_dir + f"/res/{tiku}"
+    return pd.read_excel(excel_path, sheet_name='题库')
+
+
+def search_text(text, tiku):
     if text:
         text = text.replace("0)", "")
         text = text.replace(")", "\)")
         text = text.replace("(", "\(")
-        return df.query(f'name.str.contains("{text}")')
+        return df_factory(tiku).query(f'name.str.contains("{text}")')
     else:
         return pd.DataFrame([])
 
 
-def get_right_text_list(stem):
-    stem_df = search_text(stem)
+def get_right_text_list(stem, tiku):
+    stem_df = search_text(stem, tiku)
     right_text_list = []
     for index, row in stem_df.iterrows():
         for text in row['right_option'].split(';\n'):
@@ -36,8 +44,8 @@ def match_right_options(right_text_list, stem_options):
     return right_options
 
 
-def get_right_options_by_question(question):
-    right_text_list = get_right_text_list(question['stem'])
+def get_right_options_by_question(question, tiku):
+    right_text_list = get_right_text_list(question['stem'], tiku)
     return match_right_options(right_text_list, question['options'])
 
 
