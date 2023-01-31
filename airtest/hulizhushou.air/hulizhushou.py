@@ -15,7 +15,7 @@ poco = UnityPoco()
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=False)
 
-data_path = r'E:\work\hulizhushou\res\data-18.txt'
+data_path = r'E:\work\hulizhushou\res\data-2022年度护理人员晋级考试-题库.txt'
 s_question_list = []
 all_question_list = []
 
@@ -111,6 +111,7 @@ while num > 0:
                         fp.write("\n")
                         s_question_list = []
                 except BaseException:
+                    print("GBK编码错误，原题如下：")
                     print(repr(s_question_list))
                     s_question_list = []
             poco(text="提 交").click()
