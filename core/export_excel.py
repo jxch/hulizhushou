@@ -15,6 +15,7 @@ for index, line in enumerate(f.readlines()):
     questions_json = line.strip()
     if len(questions_json) > 0:
         questions_json = questions_json.replace("\'", "\"")
+        questions_json = questions_json.replace("\\", "\\\\")
 
         file = open(tmp_path, 'w')
         file.write(str(questions_json))

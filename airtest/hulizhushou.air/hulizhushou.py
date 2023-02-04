@@ -83,7 +83,8 @@ while num > 0:
     
         if success is False:
             touch(Template(r"tpl1663586201735.png", record_pos=(-0.44, -0.554), resolution=(1200, 2000)))
-            poco(text="确定").click()
+            if button_text() == "确定":
+                poco(text="确定").click()
             data_sv = poco("android:id/content").offspring("android.widget.ScrollView")[0]
             data_texts = texts = sv.offspring("android.widget.TextView")
             data_question = {}
