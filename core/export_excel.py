@@ -39,4 +39,5 @@ lis = sorted(lis, key=lambda i: (i['name']))
 pf = pd.DataFrame(list(lis))
 pf.to_excel(excel_path, sheet_name='题库', encoding='gbk', index=False)
 
+f.close()
 print('\nSUCCESS')
