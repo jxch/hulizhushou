@@ -1,5 +1,8 @@
 from os.path import dirname, abspath
 import pandas as pd
+from pypinyin import lazy_pinyin
+
+tiku_map_lazy = {}
 
 
 def tiku_factory(code=None):
@@ -12,10 +15,18 @@ def tiku_factory(code=None):
     return "题库.xlsx"
 
 
+def convert_lazy_pinyin_str(name):
+    return ''.join(lazy_pinyin(name))
+
+
 def df_factory(tiku):
-    base_dir = dirname(dirname(abspath(__file__)))
-    excel_path = base_dir + f"/res/{tiku}"
-    return pd.read_excel(excel_path, sheet_name='题库')
+    if tiku not in tiku_map_lazy:
+        base_dir = dirname(dirname(abspath(__file__)))
+        excel_path = base_dir + f"/res/{tiku}"
+        df = pd.read_excel(excel_path, sheet_name='题库')
+        df['name_pinyin'] = df.apply(convert_lazy_pinyin_str, axis=1)
+        tiku_map_lazy[tiku] = df
+    return tiku_map_lazy[tiku]
 
 
 def search_text(text, tiku):
@@ -23,7 +34,8 @@ def search_text(text, tiku):
         text = text.replace("0)", "")
         text = text.replace(")", "\)")
         text = text.replace("(", "\(")
-        return df_factory(tiku).query(f'name.str.contains("{text}")')
+        return df_factory(tiku).query(
+            f'name.str.contains("{text}") or name_pinyin.str.contains("{convert_lazy_pinyin_str(text)}")')
     else:
         return pd.DataFrame([])
 
