@@ -2,26 +2,32 @@ import pandas as pd
 import re
 from core.utils import iter_count
 
-data_path = "../res/data-2022年度护理人员晋级考试-题库.txt"
+data_path = "../res/data-2022-第一季度三基理论知识点练习-题库.txt"
 tmp_path = "../tmp/data.json"
-excel_path = "../res/题库-2022年度护理人员晋级考试.xlsx"
+excel_path = "../res/题库-2022-第一季度三基理论知识点练习.xlsx"
 
 all_q = []
+f = None
 
 lines_num = iter_count(data_path)
-f = open(data_path, encoding='gbk')
+try:
+    f = open(data_path, encoding='utf-8')
+except BaseException:
+    f = open(data_path, encoding='gbk')
+
 for index, line in enumerate(f.readlines()):
     print('\r', "lines:" + str(index + 1) + "/" + str(lines_num), end='', flush=True)
     questions_json = line.strip()
     if len(questions_json) > 0:
+        questions_json = questions_json.replace("\"", "")
         questions_json = questions_json.replace("\'", "\"")
         questions_json = questions_json.replace("\\", "\\\\")
 
-        file = open(tmp_path, 'w')
+        file = open(tmp_path, 'w', encoding='utf-8')
         file.write(str(questions_json))
         file.close()
 
-        df = pd.read_json(tmp_path, encoding="gbk")
+        df = pd.read_json(tmp_path, encoding='utf-8')
 
         for df_index, row in df.iterrows():
             rights = re.findall(r'正确答案：[A-Z,]*', row['right'])[0].strip('正确答案：').strip().split(',')

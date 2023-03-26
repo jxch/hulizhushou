@@ -7,6 +7,8 @@ def tiku_factory(code=None):
         return "题库-18.xlsx"
     if code == "2022年度护理人员晋级考试":
         return "题库-2022年度护理人员晋级考试.xlsx"
+    if code == "2022-第一季度三基理论知识点练习":
+        return "题库-2022-第一季度三基理论知识点练习.xlsx"
     return "题库.xlsx"
 
 
