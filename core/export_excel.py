@@ -2,9 +2,9 @@ import pandas as pd
 import re
 from core.utils import iter_count
 
-data_path = "../res/data-2022-第一季度三基理论知识点练习-题库.txt"
+data_path = "../res/data-2023-第二季度三基理论知识点练习-题库.txt"
 tmp_path = "../tmp/data.json"
-excel_path = "../res/题库-2022-第一季度三基理论知识点练习.xlsx"
+excel_path = "../res/题库-2023-第二季度三基理论知识点练习.xlsx"
 
 all_q = []
 f = None

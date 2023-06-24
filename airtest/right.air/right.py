@@ -23,8 +23,8 @@ poco = UnityPoco()
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=False)
 
-data_path = r'E:\work\hulizhushou\res\data-2022-第一季度三基理论知识点练习-题库.txt'
-tmp_path = r'E:\work\hulizhushou\tmp\data.json'
+data_path = r'D:\work\hulizhushou\res\data-2023-第二季度三基理论知识点练习-题库.txt'
+tmp_path = r'D:\work\hulizhushou\tmp\data.json'
 all_question_list = []
 
 f=None

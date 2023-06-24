@@ -15,7 +15,7 @@ poco = UnityPoco()
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=False)
 
-data_path = r'E:\work\hulizhushou\res\data-2022-第一季度三基理论知识点练习-题库.txt'
+data_path = r'D:\work\hulizhushou\res\data-2023-第二季度三基理论知识点练习-题库.txt'
 s_question_list = []
 all_question_list = []
 
@@ -126,7 +126,8 @@ try:
                 if exists(Template(r"tpl1673871798298.png", record_pos=(-0.23, -0.007), resolution=(1200, 2000))):
                     touch(Template(r"tpl1663591654765.png", record_pos=(0.296, 0.07), resolution=(1200, 2000)))
                     time.sleep(1)
-except BaseException:
+except BaseException as e:
+    print(e)
     print("代码bug，保存的题：")
     print('all_question_list::')
     print(repr(all_question_list))
