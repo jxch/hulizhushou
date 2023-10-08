@@ -15,7 +15,7 @@ poco = UnityPoco()
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=False)
 
-data_path = r'D:\work\hulizhushou\res\data-2023-第二季度三基理论知识点练习-题库.txt'
+data_path = r'D:\work\hulizhushou\res\data-2023-第三季度三基理论知识点练习-题库.txt'
 s_question_list = []
 all_question_list = []
 
@@ -23,20 +23,20 @@ all_question_list = []
 def touch_options(r_option_list):
     for option in r_option_list:
         if option == 'A':
-            touch(Template(r"tpl1663586100277.png", record_pos=(-0.443, -0.552), resolution=(1200, 2000)))
-
+            touch(Template(r"tpl1695695758291.png", record_pos=(-0.442, -0.477), resolution=(1200, 2000)))
+                    
         if option == 'B':
-            touch(Template(r"tpl1663586107362.png", record_pos=(-0.443, -0.478), resolution=(1200, 2000)))
+            touch(Template(r"tpl1695695770262.png", record_pos=(-0.443, -0.4), resolution=(1200, 2000)))
 
         if option == 'C':
-            touch(Template(r"tpl1663586113855.png", record_pos=(-0.441, -0.398), resolution=(1200, 2000)))
+            touch(Template(r"tpl1695695783131.png", record_pos=(-0.44, -0.323), resolution=(1200, 2000)))
 
         if option == 'D':
-            touch(Template(r"tpl1663586121027.png", record_pos=(-0.442, -0.323), resolution=(1200, 2000)))
+            touch(Template(r"tpl1695695792582.png", record_pos=(-0.443, -0.244), resolution=(1200, 2000)))
 
         if option == 'E':
-            touch(Template(r"tpl1663586129679.png", record_pos=(-0.443, -0.246), resolution=(1200, 2000)))
-        
+            touch(Template(r"tpl1695695801224.png", record_pos=(-0.442, -0.168), resolution=(1200, 2000)))
+
 
 
 def right_options(right_text):
@@ -65,12 +65,13 @@ try:
             texts = sv.offspring("android.widget.TextView")
 
             question = {}
-            question['num'] = texts[1].get_text()
-            question['stem'] = texts[0].get_text()
+            question['num'] = texts[2].get_text()
+            question['stem'] = texts[3].get_text()
             question['options'] = {}
 
-            for i in range(2, len(texts) - 1):
-                question['options'][chr(i - 2 + ord('A'))] = texts[i].get_text()
+
+            for i in range(4, len(texts) - 1):
+                question['options'][chr(i - 4 + ord('A'))] = texts[i].get_text()
 
     #         r = requests.post("http://127.0.0.1:5000/right_options", json={'question':question})
     #         r_options = r.json()
@@ -81,6 +82,7 @@ try:
                 if q['name'] == question['stem']:
                     touch_options(right_options(q['right']))
                     success = True
+                    print(f"----->>>>>>> {q['name']}: {q['right']} -> {right_options(q['right'])}")
                     break
 
             if success is False:
@@ -90,14 +92,15 @@ try:
                 data_sv = poco("android:id/content").offspring("android.widget.ScrollView")[0]
                 data_texts = texts = sv.offspring("android.widget.TextView")
                 data_question = {}
-                data_question['num'] = data_texts[1].get_text()
-                data_question['name'] = data_texts[0].get_text()
+                data_question['num'] = data_texts[2].get_text()
+                data_question['name'] = data_texts[3].get_text()
                 data_question['right'] = data_texts[-2].get_text()
                 if "答案解析" in data_question['right'] :
                     data_question['right'] = data_texts[-4].get_text()
                 data_question['option'] = question['options']
                 s_question_list.append(data_question)
                 all_question_list.append(data_question)
+                print(data_question)
 
     #         else:
     #             touch_options(r_options)
