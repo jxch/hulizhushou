@@ -15,7 +15,7 @@ poco = UnityPoco()
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=False)
 
-data_path = r'D:\work\hulizhushou\res\data-2023-第三季度三基理论知识点练习-题库.txt'
+data_path = r'D:\work\hulizhushou\res\data-2023-三基练习题-题库.txt'
 s_question_list = []
 all_question_list = []
 
@@ -35,7 +35,10 @@ def touch_options(r_option_list):
             touch(Template(r"tpl1695695792582.png", record_pos=(-0.443, -0.244), resolution=(1200, 2000)))
 
         if option == 'E':
-            touch(Template(r"tpl1695695801224.png", record_pos=(-0.442, -0.168), resolution=(1200, 2000)))
+            touch(Template(r"tpl1695695801224.png", record_pos=(-0.442, -0.168), resolution=(1200, 2000))) 
+        if option == 'F':
+            touch(Template(r"tpl1698125702694.png", record_pos=(-0.466, 0.121), resolution=(2000, 1200)))
+
 
 
 
