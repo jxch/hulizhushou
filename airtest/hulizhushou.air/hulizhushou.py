@@ -4,6 +4,7 @@ __author__ = "xiche"
 from airtest.core.api import *
 import requests
 import time
+import traceback
 
 auto_setup(__file__)
 
@@ -15,7 +16,7 @@ poco = UnityPoco()
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=False)
 
-data_path = r'D:\work\hulizhushou\res\data-2023-三基练习题-题库.txt'
+data_path = r'D:\hulizhushou\res\data-2023-第四季度三基理论-题库.txt'
 s_question_list = []
 all_question_list = []
 
@@ -115,14 +116,18 @@ try:
                 touch(Template(r"tpl1679758278500.png", record_pos=(-0.003, 0.025), resolution=(1200, 2000)))
 
             if button_text() == "提 交" or exists(Template(r"tpl1679759883274.png", record_pos=(-0.001, -0.089), resolution=(1200, 2000))):
+                print("提交")
                 if s_question_list:
+                    print("写入")
                     try:
                         with open(data_path, "a", encoding='utf-8') as fp:
                             fp.write("\n")
                             fp.write(repr(s_question_list))
                             fp.write("\n")
                             s_question_list = []
-                    except BaseException:
+                    except BaseException as e:
+                        print(e)
+                        traceback.print_exc()
                         print("写入错误，原题如下：")
                         print(repr(s_question_list))
                         s_question_list = []
@@ -134,6 +139,7 @@ try:
                     time.sleep(1)
 except BaseException as e:
     print(e)
+    traceback.print_exc()            
     print("代码bug，保存的题：")
     print('all_question_list::')
     print(repr(all_question_list))

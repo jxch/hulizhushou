@@ -14,6 +14,10 @@ def tiku_factory(code=None):
         return "题库-2022年度护理人员晋级考试.xlsx"
     if code == "2022-第一季度三基理论知识点练习":
         return "题库-2022-第一季度三基理论知识点练习.xlsx"
+    if code == "2023-护理年终理论考核":
+        return "题库-2023-护理年终理论考核.xlsx"
+    if code == "2023-第四季度三基理论":
+        return "题库-2023-第四季度三基理论.xlsx"
     return "题库.xlsx"
 
 
