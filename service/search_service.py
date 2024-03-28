@@ -6,6 +6,8 @@ tiku_map_lazy = {}
 
 
 def tiku_factory(code=None):
+    if code == "2024-第一季度":
+        return "题库-2024-第一季度.xlsx"
     if code == "2023-第二季度三基理论知识点练习":
         return "题库-2023-第二季度三基理论知识点练习.xlsx"
     if code == "18":
