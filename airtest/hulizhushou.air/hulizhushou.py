@@ -16,7 +16,7 @@ poco = UnityPoco()
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=False)
 
-data_path = r'D:\hulizhushou\res\data-2024-第一季度-题库.txt'
+data_path = r'D:\hulizhushou\res\data-2024-血糖-题库.txt'
 s_question_list = []
 all_question_list = []
 
