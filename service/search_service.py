@@ -6,6 +6,8 @@ tiku_map_lazy = {}
 
 
 def tiku_factory(code=None):
+    if code == "2025-年终":
+        return "题库-2025-年终.xlsx"
     if code == "2024-年终":
         return "题库-2024-年终.xlsx"
     if code == "2024-N3":

@@ -16,7 +16,7 @@ poco = UnityPoco()
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=False)
 
-data_path = r'D:\hulizhushou\res\data-2024-年终-题库.txt'
+data_path = r'D:\hulizhushou\res\data-2025-第四季度三基理论-题库.txt'
 s_question_list = []
 all_question_list = []
     
@@ -48,17 +48,24 @@ def button_text():
 
 
 try: 
-    num = 30
+    num = 30000
 
     while num > 0:
         num = num - 1
 
-        if exists(Template(r"tpl1663582803666.png", record_pos=(0.448, -0.752), resolution=(1200, 2000))):
-            touch(Template(r"tpl1663582813854.png", record_pos=(0.448, -0.752), resolution=(1200, 2000)))
+        if exists(Template(r"tpl1766305407954.png", record_pos=(0.426, -0.952), resolution=(1080, 2340))):
+            touch(Template(r"tpl1766305407954.png", record_pos=(0.426, -0.952), resolution=(1080, 2340)))
+            time.sleep(2)
+            if exists(Template(r"tpl1766305487729.png", record_pos=(0.012, 0.95), resolution=(1080, 2340))):
+                touch(Template(r"tpl1766305487729.png", record_pos=(0.012, 0.95), resolution=(1080, 2340)))
+                time.sleep(1)
+            if exists(Template(r"tpl1766307467959.png", record_pos=(0.131, 0.945), resolution=(1080, 2340))):
+                touch(Template(r"tpl1766307467959.png", record_pos=(0.131, 0.945), resolution=(1080, 2340)))
+                time.sleep(1)
+        time.sleep(1)
+        while exists(Template(r"tpl1766378350872.png", record_pos=(-0.416, -0.519), resolution=(1080, 2340))) :
 
-            poco(text="开始答题").click()
 
-        while exists(Template(r"tpl1663582860933.png", record_pos=(-0.44, -0.552), resolution=(1200, 2000))):
             sv = poco("android:id/content").offspring("android.widget.ScrollView")[0]
             texts = sv.offspring("android.widget.TextView")
 
@@ -84,7 +91,7 @@ try:
                     break
 
             if success is False:
-                touch(Template(r"tpl1735220691959.png", record_pos=(-0.439, -0.512), resolution=(1200, 2000)))
+                touch(Template(r"tpl1766305508276.png", record_pos=(-0.413, -0.516), resolution=(1080, 2340)))
 
 
 
@@ -132,10 +139,16 @@ try:
                         s_question_list = []
                 poco(text="提 交").click()
 
-                time.sleep(0.5)
+                time.sleep(1)
                 if exists(Template(r"tpl1673871798298.png", record_pos=(-0.23, -0.007), resolution=(1200, 2000))):
                     touch(Template(r"tpl1663591654765.png", record_pos=(0.296, 0.07), resolution=(1200, 2000)))
-                    time.sleep(1)
+                    time.sleep(2)
+                if exists(Template(r"tpl1766306382755.png", record_pos=(0.003, 0.006), resolution=(1080, 2340))):
+                    touch(Template(r"tpl1766306393978.png", record_pos=(0.328, 0.085), resolution=(1080, 2340)))
+                    time.sleep(2)
+        time.sleep(2)
+
+
 except BaseException as e:
     print(e)
     traceback.print_exc()            
@@ -154,5 +167,6 @@ except BaseException as e:
 
     
     
+
 
 
